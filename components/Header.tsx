@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Popover, Transition } from '@headlessui/react';
+import { Popover, Transition } from "@headlessui/react";
 import Image from "next/image";
 
 interface WelcomeProps {
@@ -7,14 +7,13 @@ interface WelcomeProps {
 }
 
 const navigation = [
-    { name: 'Product', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
-  ]
+  { name: "Product", href: "#" },
+  { name: "Features", href: "#" },
+  { name: "Marketplace", href: "#" },
+];
 
 const Header: React.FC<WelcomeProps> = (props) => (
-    <div className="relative bg-white overflow-hidden">
+  <div className="relative bg-white overflow-hidden">
     <div className="max-w-7xl mx-auto">
       <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
         <svg
@@ -29,31 +28,23 @@ const Header: React.FC<WelcomeProps> = (props) => (
 
         <Popover>
           <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
-            <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
+            <nav
+              className="relative flex items-center justify-between sm:h-10 lg:justify-start"
+              aria-label="Global"
+            >
               <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                 <div className="flex items-center justify-between w-full md:w-auto">
                   <a href="#">
                     <span className="sr-only">Workflow</span>
-                   
                   </a>
                   <div className="-mr-2 flex items-center md:hidden">
                     <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                       <span className="sr-only">Open main menu</span>
-                     
                     </Popover.Button>
                   </div>
                 </div>
               </div>
-              <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                {navigation.map((item) => (
-                  <a key={item.name} href={item.href} className="font-medium text-gray-500 hover:text-gray-900">
-                    {item.name}
-                  </a>
-                ))}
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  Log in
-                </a>
-              </div>
+              <div>Group 12</div>
             </nav>
           </div>
 
@@ -72,13 +63,10 @@ const Header: React.FC<WelcomeProps> = (props) => (
             >
               <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                 <div className="px-5 pt-4 flex items-center justify-between">
-                  <div>
-                    
-                  </div>
+                  <div></div>
                   <div className="-mr-2">
                     <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                       <span className="sr-only">Close main menu</span>
-                     
                     </Popover.Button>
                   </div>
                 </div>
@@ -107,38 +95,62 @@ const Header: React.FC<WelcomeProps> = (props) => (
         <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
           <div className="sm:text-center lg:text-left">
             <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-              <span className="block xl:inline">Data to enrich your</span>{' '}
-              <span className="block text-indigo-600 xl:inline">online business</span>
+              <span className="block xl:inline">Data to enrich your</span>{" "}
+              <span className="block text-indigo-600 xl:inline">
+                online business
+              </span>
             </h1>
             <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
+              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
+              fugiat aliqua.
             </p>
-            <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-              <div className="rounded-md shadow">
-                <a
-                  href="#"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
-                >
-                  Get started
-                </a>
-              </div>
-              <div className="mt-3 sm:mt-0 sm:ml-3">
-                <a
-                  href="#"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
-                >
-                  Live demo
-                </a>
-              </div>
-            </div>
           </div>
         </main>
+       
+          <div className=" md:ml-10 mt-16 w-100 text-center  md:pr-4  md:space-x-8">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="font-medium  ms:pr-8  text-gray-500 hover:text-gray-900"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        
+        
+          <div className="pt-2 absolute mx-auto text-gray-600">
+            <input
+              className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+              type="search"
+              name="search"
+              placeholder="Search"
+            />
+            <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
+              <svg
+                className="text-gray-600 h-4 w-4 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                id="Capa_1"
+                x="0px"
+                y="0px"
+                viewBox="0 0 56.966 56.966"
+                style={{ enableBackground: "new 0 0 56.966 56.966" }}
+                xmlSpace="preserve"
+                width="512px"
+                height="512px"
+              >
+                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+              </svg>
+            </button>
+          </div>
+
       </div>
     </div>
-    <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-     
-    </div>
+    <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2"></div>
   </div>
 );
 
