@@ -10,25 +10,27 @@ interface ArticleProps {
 const Article: React.FC<ArticleProps> = (props) => {
   const router = useRouter();
   const query = router.query;
-  const image = query.urlToImage;
-  console.log(query);
+ 
+
   return (
     <div className="flex flex-column">
       <div className="pb-12-6">
         <Image
-          className=" relative h-full w-full"
+          className=" relative h-full w-full object-fit"
           unoptimized
           src={`${query.urlToImage}`}
           alt="Loading"
+          height={100}
+          width={100}
           layout="fill"
         />
       </div>
      
       
       <div className="z-10">
-      <div className="mt-40">z</div>
+      <div className="mt-64 mb-64">z</div>
         <div className="w-full mt-64 md:w-3/5 mb-12 mx-auto">
-          <div className="w-full text-gray-800 text-4xl px-5 font-bold leading-none">
+          <div className="w-full text-red-800 text-4xl px-5 font-bold leading-none">
             {query.title}
           </div>
 
@@ -58,16 +60,6 @@ const Article: React.FC<ArticleProps> = (props) => {
 };
 
 {
-  /* <div className="sm:text-center lg:text-left">
-              <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span className="block xl:inline">Temeperature: 30</span>{" "}
-                <span className="block text-indigo-600 xl:inline">
-                  Prediction
-                </span>
-              </h1>
-              <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Get your
-              </p>
-            </div> */
+ 
 }
 export default Article;

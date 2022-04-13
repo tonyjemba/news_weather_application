@@ -11,8 +11,28 @@ const navigation = [
   { name: "Global News", href: "#" },
   { name: "Breaking News", href: "#" },
 ];
+async function getWeather(){
+  const requestUrl="http://api.weatherapi.com/v1/current.json?key=68e7919db5944badb83114030221304&q=kampala&aqi=no"
+  const res = await fetch(requestUrl);
+  const data = await res.json();
 
-const Header: React.FC<WelcomeProps> = (props) => (
+  return data;
+}
+const Header: React.FC<WelcomeProps> = (props) => {
+  const [temeperature, setTemperature] = React.useState(0);
+  const [prediction, setPrediction] = React.useState("");
+  const [location, setLocation] = React.useState("");
+
+  React.useEffect(() => {
+    getWeather().then(
+      (res)=>{
+        setPrediction(res.current.condition.text);
+        setTemperature(res.current.temp_c);
+        setLocation(res.location.name);
+      }
+    )
+  }, []);
+  return(
   <div className="relative bg-white overflow-hidden">
     <div className="max-w-7xl mx-auto">
       <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -94,14 +114,18 @@ const Header: React.FC<WelcomeProps> = (props) => (
 
         <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
           <div className="sm:text-center lg:text-left">
-            <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-              <span className="block xl:inline">Temeperature: 30</span>{" "}
-              <span className="block text-indigo-600 xl:inline">
-                Prediction
+            <h2 className="text-2xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+              <span className="block xl:inline">Temeperature: {temeperature}{'\u00b0'}C</span>{" "}
+              <br/>
+              
+              <br/>
+
+            </h2>
+            <span className="block text-indigo-600 xl:inline" style={{ fontSize:"25px", fontWeight:"bold" }}>
+                Weather Prediction: {prediction}
               </span>
-            </h1>
             <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Get your
+              Location: {location}
             </p>
           </div>
         </main>
@@ -120,8 +144,8 @@ const Header: React.FC<WelcomeProps> = (props) => (
         </div>
       </div>
     </div>
-    <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2"></div>
+
   </div>
-);
+)};
 
 export default Header;
