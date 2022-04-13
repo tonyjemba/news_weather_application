@@ -6,6 +6,7 @@ interface WelcomeProps {
   title: string;
   urlToImage: string;
   published: string;
+  data: string;
 }
 
 const NewsCard: React.FC<WelcomeProps> = (props) => (
@@ -94,7 +95,10 @@ const NewsCard: React.FC<WelcomeProps> = (props) => (
                   className="text-xxs text-amber-700 font-semibold ml-2
                        group-hover:text-white delay-100"
                 >
-                  <Link href={`/article/${encodeURIComponent(props.title)}`}>
+                  <Link  href={{
+            pathname: `/article/${encodeURIComponent(props.title)}`,
+            query: props.data, // the data
+          }}>
                     <a>Read More</a>
                   </Link>
                 </div>

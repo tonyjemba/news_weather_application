@@ -91,6 +91,7 @@ const List: React.FC<WelcomeProps> = (props) => {
               title={article.title}
               urlToImage={article.urlToImage}
               published={article.publishedAt}
+              data={article}
             />
           </div>
         ))}
