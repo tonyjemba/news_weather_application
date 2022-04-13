@@ -66,9 +66,9 @@ const List: React.FC<WelcomeProps> = (props) => {
          apiData.map((article,index)=>(
           <div key={index}>
             <NewsCard
-          title="Biden appears to accuse Russia of 'genocide"
-          urlToImage="https://ichef.bbci.co.uk/news/1024/branded_news/17614/production/_124146759_p0c0ydsg.jpg"
-          author="BBC News"
+          title={article.title}
+          urlToImage={article.urlToImage}
+          published={article.publishedAt}
         />
           </div>
          ))
