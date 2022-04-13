@@ -1,19 +1,19 @@
 import * as React from "react";
 import NewsCard from "./NewsCard";
+import Link from "next/link";
 
 interface WelcomeProps {
   name?: string;
 }
-
-
-async function getApiData(query?:String,page?:Number) {
+//Request fuction that runs when the app is mounted
+async function getApiData(query?: String, page?: Number) {
   const Query = query;
-const Page = page;
-const requestUrl =
-  "https://newsapi.org/v2/everything?" +
-  `q=${Query}&` +
-  `page=${Page}&` +
-  "apiKey=0870e65fa5674bfb9d0914b0bfd7ca77";
+  const Page = page;
+  const requestUrl =
+    "https://newsapi.org/v2/everything?" +
+    `q=${Query}&` +
+    `page=${Page}&` +
+    "apiKey=0870e65fa5674bfb9d0914b0bfd7ca77";
 
   const res = await fetch(requestUrl);
   const data = await res.json();
@@ -24,26 +24,47 @@ const requestUrl =
 const List: React.FC<WelcomeProps> = (props) => {
   const [apiData, setApiData] = React.useState([]);
   const [totalResults, setTotalResults] = React.useState(0);
+  const [pageNumber, setPageNumber] = React.useState(1);
+  const [query, setQuery] = React.useState("uganda");
 
   React.useEffect(() => {
-    getApiData("uganda",1).then((res) =>{ setApiData(res.articles);setTotalResults(res.totalResults)});
+    getApiData(query, pageNumber).then((res) => {
+      setApiData(res.articles);
+      setTotalResults(res.totalResults);
+    });
   }, []);
-  console.log(apiData);
-  
+
+  //subsequent Requests use this function
+  async function nextApiRequest() {
+    getApiData(query, pageNumber).then((res) => {
+      setApiData(res.articles);
+    });
+  }
+
   return (
     <div>
       {/* Component Start */}
 
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mt-6">
-        <span className="text-sm font-semibold">1-20 of {totalResults} results</span>
-        <button className="relative text-sm focus:outline-none group mt-4 sm:mt-0">
+        <span className="text-sm font-semibold">
+          1-20 of {totalResults} results
+        </span>
+        <button
+          className="relative text-sm focus:outline-none group mt-4 sm:mt-0"
+          onClick={() => nextApiRequest()}
+        >
           <div className="flex  items-center justify-between w-50 h-10 px-3  rounded border-2 border-gray-300  ">
             <input
               className="bg-white    text-sm focus:outline-none"
-              type="search"
+              type="Search"
               name="search"
               placeholder="Search News"
+              onChange={(event) => {
+                setQuery(event.target.value);
+              }}
+              onKeyPress={(e) => e.key === "Enter" && nextApiRequest()}
             />
+
             <svg
               className="text-gray-600 h-4 w-4 fill-current"
               xmlns="http://www.w3.org/2000/svg"
@@ -64,19 +85,15 @@ const List: React.FC<WelcomeProps> = (props) => {
         </button>
       </div>
       <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-x-6 gap-y-2 w-full mt-6">
-       {
-         apiData.map((article,index)=>(
+        {apiData.map((article, index) => (
           <div key={index}>
             <NewsCard
-          title={article.title}
-          urlToImage={article.urlToImage}
-          published={article.publishedAt}
-        />
+              title={article.title}
+              urlToImage={article.urlToImage}
+              published={article.publishedAt}
+            />
           </div>
-         ))
-       }
-       
-        
+        ))}
       </div>
       <div className="flex justify-center mt-10 mb-10 space-x-1">
         <button className="flex items-center justify-center h-8 w-8 rounded text-gray-600 hover:bg-indigo-200">
@@ -93,19 +110,53 @@ const List: React.FC<WelcomeProps> = (props) => {
             />
           </svg>
         </button>
-        <button className="flex  items-center justify-center h-8 px-2 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600">
+        <button
+          className="flex  items-center justify-center h-8 px-2 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600"
+          onClick={() =>
+            pageNumber > 0
+              ? () => {
+                  setPageNumber(pageNumber - 1);
+                  nextApiRequest();
+                }
+              : null
+          }
+        >
           Prev
         </button>
-        <button className="flex items-center justify-center h-8 w-8 rounded text-gray-600 hover:bg-indigo-200 text-sm font-medium hover:text-indigo-600">
+        <button
+          className="flex items-center justify-center h-8 w-8 rounded text-gray-600 hover:bg-indigo-200 text-sm font-medium hover:text-indigo-600"
+          onClick={() => {
+            setPageNumber(1);
+            nextApiRequest();
+          }}
+        >
           1
         </button>
-        <button className="flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600">
+        <button
+          className="flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600"
+          onClick={() => {
+            setPageNumber(2);
+            nextApiRequest();
+          }}
+        >
           2
         </button>
-        <button className="flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600">
+        <button
+          className="flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600"
+          onClick={() => {
+            setPageNumber(3);
+            nextApiRequest();
+          }}
+        >
           3
         </button>
-        <button className="flex items-center justify-center h-8 px-2 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600">
+        <button
+          className="flex items-center justify-center h-8 px-2 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600"
+          onClick={() => {
+            setPageNumber(pageNumber + 1);
+            nextApiRequest();
+          }}
+        >
           Next
         </button>
         <button className="flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200 text-gray-600 hover:text-indigo-600">

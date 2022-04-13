@@ -1,5 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
+import Link from 'next/link';
 
 interface WelcomeProps {
   title: string;
@@ -88,11 +89,14 @@ const NewsCard: React.FC<WelcomeProps> = (props) => (
                        group-hover:text-white delay-100"
                 />
                 {/* Text */}
+
                 <div
                   className="text-xxs text-amber-700 font-semibold ml-2
                        group-hover:text-white delay-100"
                 >
-                  Read More
+                  <Link href={`/article/${encodeURIComponent(props.title)}`}>
+                    <a>Read More</a>
+                  </Link>
                 </div>
               </a>
             </div>

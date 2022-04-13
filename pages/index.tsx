@@ -27,7 +27,7 @@ const Home: NextPage = () => {
         >
           Created by{" "}
           <span className="font-bold ml-1">
-              Group 12
+              Group 27
           </span>
         </a>
       </footer>
