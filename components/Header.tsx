@@ -12,7 +12,8 @@ const navigation = [
   { name: "Breaking News", href: "#" },
 ];
 async function getWeather(){
-  const requestUrl="http://api.weatherapi.com/v1/current.json?key=68e7919db5944badb83114030221304&q=kampala&aqi=no"
+  
+  const requestUrl="https://api.weatherapi.com/v1/current.json?key=68e7919db5944badb83114030221304&q=kampala&aqi=no"
   const res = await fetch(requestUrl);
   const data = await res.json();
 
