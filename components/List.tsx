@@ -4,15 +4,17 @@ import NewsCard from "./NewsCard";
 interface WelcomeProps {
   name?: string;
 }
-const query = "Uganda";
-const page = 1;
+
+
+async function getApiData(query?:String,page?:Number) {
+  const Query = query;
+const Page = page;
 const requestUrl =
   "https://newsapi.org/v2/everything?" +
-  `q=${query}&` +
-  `page=${page}&` +
+  `q=${Query}&` +
+  `page=${Page}&` +
   "apiKey=0870e65fa5674bfb9d0914b0bfd7ca77";
 
-async function getApiData() {
   const res = await fetch(requestUrl);
   const data = await res.json();
 
@@ -24,7 +26,7 @@ const List: React.FC<WelcomeProps> = (props) => {
   const [totalResults, setTotalResults] = React.useState(0);
 
   React.useEffect(() => {
-    getApiData().then((res) =>{ setApiData(res.articles);setTotalResults(res.totalResults)});
+    getApiData("uganda",1).then((res) =>{ setApiData(res.articles);setTotalResults(res.totalResults)});
   }, []);
   console.log(apiData);
   
@@ -61,7 +63,7 @@ const List: React.FC<WelcomeProps> = (props) => {
           </div>
         </button>
       </div>
-      <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6">
+      <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-x-6 gap-y-2 w-full mt-6">
        {
          apiData.map((article,index)=>(
           <div key={index}>
